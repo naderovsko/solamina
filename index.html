@@ -15,10 +15,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       background-image: linear-gradient(135deg, #000, #111);
       text-align: center;
       overflow-x: hidden;
+      position: relative;
     }
     h1 {
       font-size: 4em;
@@ -33,12 +34,15 @@
       margin: 1em auto;
       font-size: 1.2em;
       line-height: 1.5;
+      color: #39ff14;
     }
     footer {
       position: absolute;
       bottom: 1em;
       font-size: 0.8em;
       color: #aaa;
+      width: 100%;
+      text-align: center;
     }
     @keyframes glitch {
       0% { transform: translate(0); }
@@ -48,44 +52,79 @@
       80% { transform: translate(1px, -1px); }
       100% { transform: translate(0); }
     }
+    /* Logo officiel de Solamina */
+    #main-logo {
+      width: 120px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* Logo bouton Solana */
+    #btn-music {
+      cursor: pointer;
+      margin-top: 30px;
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 0 5px #39ff14);
+      transition: transform 0.2s ease;
+    }
+    #btn-music:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
+
+  <!-- Logo Solamina tout en haut -->
+  <img id="main-logo" src="assets/logobc.png" alt="Solamina Logo" />
+
+  <!-- Titre principal -->
   <h1>Solamina</h1>
+
+  <!-- Paragraphe -->
   <p>
     Solamina is what happens when you leave your Solana bags in a lab too long.<br />
     <strong>Mutated. Glitched. Glorious.</strong><br />
     It's not just a token. It's an unstable memetic reaction on-chain.<br />
     <span style="color: #ff0055;">Warning:</span> May cause sudden pumps and viral contagion.
   </p>
+
+  <!-- Logo Solana cliquable pour musique -->
+  <svg id="btn-music" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" role="button" aria-label="Start music" tabindex="0">
+    <path fill="#00FFA3" d="M127.6 0L0 74.1 127.6 148.3 255.2 74.1z"/>
+    <path fill="#00FFA3" d="M0 184.3L127.6 258.5 255.2 184.3 127.6 110.1z"/>
+    <path fill="#00FFA3" d="M0 368.7L127.6 442.8 255.2 368.7 127.6 294.5z"/>
+  </svg>
+
+  <!-- Pied de page -->
   <footer>
     &copy; 2025 Solamina Labs. Not financial advice. Glitch responsibly.
   </footer>
 
-  <!-- Audio caché -->
+  <!-- Audio -->
   <audio id="bg-music" autoplay muted loop>
     <source src="assets/music.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Script pour activer musique au premier scroll, clic ou touch -->
   <script>
     const music = document.getElementById("bg-music");
-    let activated = false;
+    const btnMusic = document.getElementById("btn-music");
 
     function startMusic() {
-      if (!activated) {
-        music.muted = false;
-        music.play().catch((e) => {
-          console.warn("Autoplay blocked, user interaction required", e);
-        });
-        activated = true;
-      }
+      music.muted = false;
+      music.play().catch(e => console.warn("Autoplay bloqué : interaction requise", e));
     }
 
-    window.addEventListener("scroll", startMusic, { once: true });
-    window.addEventListener("click", startMusic, { once: true });
-    window.addEventListener("touchstart", startMusic, { once: true });
+    btnMusic.addEventListener("click", startMusic);
+
+    btnMusic.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        startMusic();
+      }
+    });
   </script>
+
 </body>
 </html>
