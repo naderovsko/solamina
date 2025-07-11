@@ -99,4 +99,51 @@
 
   <!-- Paragraphe -->
   <p>
-    Solamina is what happens when you leave your Solana bags in a lab too long.<br
+    Solamina is what happens when you leave your Solana bags in a lab too long.<br />
+    <strong>Mutated. Glitched. Glorious.</strong><br />
+    It's not just a token. It's an unstable memetic reaction on-chain.<br />
+    <span style="color: #ff0055;">Warning:</span> May cause sudden pumps and viral contagion.
+  </p>
+
+  <!-- Bouton musique -->
+  <img id="btn-music" src="assets/sol2.svg" alt="Play Music" tabindex="0" />
+
+  <!-- Message après clic -->
+  <div id="info-message">
+    This site is still in its early days. We're actively building and improving. Thanks for your patience!
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" autoplay muted loop>
+    <source src="assets/music.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const btnMusic = document.getElementById("btn-music");
+    const info = document.getElementById("info-message");
+
+    function startMusic() {
+      music.muted = false;
+      music.play().catch(e => console.warn("Autoplay blocked:", e));
+      info.classList.add("visible");
+    }
+
+    btnMusic.addEventListener("click", startMusic);
+    btnMusic.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        startMusic();
+      }
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Solamina Labs. Not financial advice. Glitch responsibly.
+  </footer>
+
+</body>
+</html>
