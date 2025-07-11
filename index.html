@@ -2,19 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Solamina Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solamina</title>
   <style>
     body {
-      background: black;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #000000;
       color: #39ff14;
-      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      background-image: linear-gradient(135deg, #000, #111);
       text-align: center;
-      padding-top: 50px;
+      overflow-x: hidden;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
+    }
+
+    h1 {
+      font-size: 4em;
+      margin: 0.2em 0;
+      background: linear-gradient(90deg, #39ff14, #00ffff, #aa00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glitch 1.5s infinite;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 1em auto;
+      font-size: 1.2em;
+      line-height: 1.5;
+      color: #39ff14;
+    }
+
+    /* Logo Solamina modifié */
+    #main-logo {
+      width: 200px;
+      margin-top: 40px;
+      animation: glitch 1.5s infinite;
+      box-shadow: 0 0 25px #39ff14;
+    }
+
+    /* Bouton musique sol2.svg */
+    #btn-music {
+      width: 80px;
+      height: 80px;
+      margin-top: 30px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 5px #39ff14);
+      transition: transform 0.2s ease;
+    }
+
+    #btn-music:hover {
+      transform: scale(1.1);
+    }
+
+    /* Message fade-in */
+    #info-message {
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      color: #aaa;
+      font-size: 0.95em;
+      max-width: 400px;
+    }
+
+    #info-message.visible {
+      opacity: 1;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <h1>Solamina - Test Page</h1>
-  <p>If you see this, the basic page works.</p>
+
+  <!-- Logo Solamina -->
+  <img id="main-logo" src="assets/logobc.png" alt="Solamina Logo" />
+
+  <!-- Titre -->
+  <h1>Solamina</h1>
+
+  <!-- Paragraphe -->
+  <p>
+    Solamina is what happens when you leave your Solana bags in a lab too long.<br />
+    <strong>Mutated. Glitched. Glorious.</strong><br />
+    It's not just a token. It's an unstable memetic reaction on-chain.<br />
+    <span style="color: #ff0055;">Warning:</span> May cause sudden pumps and viral contagion.
+  </p>
+
+  <!-- Bouton musique -->
+  <img id="btn-music" src="assets/sol2.svg" alt="Play Music" tabindex="0" />
+
+  <!-- Message après clic -->
+  <div id="info-message">
+    This site is still in its early days. We're actively building and improving. Thanks for your patience!
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" autoplay muted loop>
+    <source src="assets/music.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const btnMusic = document.getElementById("btn-music");
+    const info = document.getElementById("info-message");
+
+    function startMusic() {
+      music.muted = false;
+      music.play().catch(e => console.warn("Autoplay blocked:", e));
+      info.classList.add("visible");
+    }
+
+    btnMusic.addEventListener("click", startMusic);
+    btnMusic.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        startMusic();
+      }
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Solamina Labs. Not financial advice. Glitch responsibly.
+  </footer>
+
 </body>
 </html>
