@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solamina</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="relative min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <!-- Contenu existant de la page -->
+    <main class="w-full max-w-4xl p-4 text-center">
+      <h1 class="text-4xl font-bold mb-4">Bienvenue sur Solamina</h1>
+      <p class="mb-6">Votre texte de présentation ici…</p>
+
+      <!-- Bouton pour activer la musique -->
+      <button
+        id="btn-music"
+        class="px-6 py-3 rounded-2xl shadow hover:shadow-lg transition-all duration-300 text-lg font-semibold bg-indigo-600 text-white flex items-center gap-2 mx-auto"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 19V6l12-2v13"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 10l6-1m0 4l-6 1m0 4l6-1"
+          />
+        </svg>
+        Activer la musique
+      </button>
+    </main>
+
+    <!-- Balise audio masquée -->
+    <audio id="bg-music" autoplay muted loop>
+      <source src="assets/music.mp3" type="audio/mpeg" />
+      Votre navigateur ne supporte pas la balise audio.
+    </audio>
+
+    <script>
+      // Fonction d'activation de la musique
+      const btn = document.getElementById("btn-music");
+      const music = document.getElementById("bg-music");
+
+      // Premier clic sur le bouton : on joue la musique et on change le label
+      btn.addEventListener(
+        "click",
+        () => {
+          music.muted = false;
+          music.play();
+          btn.textContent = "Musique en cours… (cliquer pour mettre en pause)";
+        },
+        { once: true }
+      );
+
+      // Clics suivants : on toggle play/pause
+      btn.addEventListener("click", () => {
+        if (music.paused) {
+          music.play();
+          btn.textContent = "Musique en cours… (cliquer pour mettre en pause)";
+        } else {
+          music.pause();
+          btn.textContent = "Relancer la musique";
+        }
+      });
+    </script>
+  </body>
+</html>
