@@ -47,14 +47,12 @@
       color: #39ff14;
     }
 
-    /* Logo Solamina : taille + animation uniquement */
     #main-logo {
       width: 200px;
       margin-top: 40px;
       animation: glitch 1.5s infinite;
     }
 
-    /* Bouton musique sol2.svg */
     #btn-music {
       width: 80px;
       height: 80px;
@@ -68,7 +66,6 @@
       transform: scale(1.1);
     }
 
-    /* Message fade-in */
     #info-message {
       margin-top: 20px;
       opacity: 0;
@@ -91,13 +88,13 @@
 </head>
 <body>
 
-  <!-- Logo Solamina (juste taille + animation) -->
+  <!-- Logo officiel -->
   <img id="main-logo" src="assets/logobc.png" alt="Solamina Logo" />
 
   <!-- Titre -->
   <h1>Solamina</h1>
 
-  <!-- Paragraphe -->
+  <!-- Texte complet -->
   <p>
     Solamina is what happens when you leave your Solana bags in a lab too long.<br />
     <strong>Mutated. Glitched. Glorious.</strong><br />
@@ -105,21 +102,21 @@
     <span style="color: #ff0055;">Warning:</span> May cause sudden pumps and viral contagion.
   </p>
 
-  <!-- Bouton musique -->
+  <!-- Bouton de musique (SVG) -->
   <img id="btn-music" src="assets/sol2.svg" alt="Play Music" tabindex="0" />
 
-  <!-- Message après clic -->
+  <!-- Message qui s'affiche au clic -->
   <div id="info-message">
     This site is still in its early days. We're actively building and improving. Thanks for your patience!
   </div>
 
-  <!-- Audio -->
+  <!-- Audio caché -->
   <audio id="bg-music" autoplay muted loop>
     <source src="assets/music.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Script -->
+  <!-- Script JS -->
   <script>
     const music = document.getElementById("bg-music");
     const btnMusic = document.getElementById("btn-music");
