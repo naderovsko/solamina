@@ -14,36 +14,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
       background-image: linear-gradient(135deg, #000, #111);
       text-align: center;
       overflow-x: hidden;
-      position: relative;
     }
-    h1 {
-      font-size: 4em;
-      margin: 0.2em 0;
-      background: linear-gradient(90deg, #39ff14, #00ffff, #aa00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glitch 1.5s infinite;
-    }
-    p {
-      max-width: 600px;
-      margin: 1em auto;
-      font-size: 1.2em;
-      line-height: 1.5;
-      color: #39ff14;
-    }
-    footer {
-      position: absolute;
-      bottom: 1em;
-      font-size: 0.8em;
-      color: #aaa;
-      width: 100%;
-      text-align: center;
-    }
+
+    /* Glitch animation */
     @keyframes glitch {
       0% { transform: translate(0); }
       20% { transform: translate(-2px, 2px); }
@@ -52,33 +30,75 @@
       80% { transform: translate(1px, -1px); }
       100% { transform: translate(0); }
     }
-    /* Logo officiel de Solamina */
-    #main-logo {
-      width: 120px;
-      margin-top: 30px;
-      margin-bottom: 10px;
+
+    h1 {
+      font-size: 4em;
+      margin: 0.2em 0;
+      background: linear-gradient(90deg, #39ff14, #00ffff, #aa00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glitch 1.5s infinite;
     }
 
-    /* Logo bouton Solana */
+    p {
+      max-width: 600px;
+      margin: 1em auto;
+      font-size: 1.2em;
+      line-height: 1.5;
+      color: #39ff14;
+    }
+
+    /* Logo Solamina */
+    #main-logo {
+      width: 120px;
+      height: 120px;
+      margin-top: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 15px #39ff14;
+    }
+
+    /* Bouton musique sol2.svg */
     #btn-music {
-      cursor: pointer;
-      margin-top: 30px;
       width: 80px;
       height: 80px;
+      margin-top: 30px;
+      cursor: pointer;
       filter: drop-shadow(0 0 5px #39ff14);
       transition: transform 0.2s ease;
     }
+
     #btn-music:hover {
       transform: scale(1.1);
+    }
+
+    /* Message fade-in */
+    #info-message {
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      color: #aaa;
+      font-size: 0.95em;
+      max-width: 400px;
+    }
+
+    #info-message.visible {
+      opacity: 1;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: #777;
     }
   </style>
 </head>
 <body>
 
-  <!-- Logo Solamina tout en haut -->
+  <!-- Logo Solamina -->
   <img id="main-logo" src="assets/logobc.png" alt="Solamina Logo" />
 
-  <!-- Titre principal -->
+  <!-- Titre -->
   <h1>Solamina</h1>
 
   <!-- Paragraphe -->
@@ -89,17 +109,13 @@
     <span style="color: #ff0055;">Warning:</span> May cause sudden pumps and viral contagion.
   </p>
 
-  <!-- Logo Solana cliquable pour musique -->
-  <svg id="btn-music" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg" role="button" aria-label="Start music" tabindex="0">
-    <path fill="#00FFA3" d="M127.6 0L0 74.1 127.6 148.3 255.2 74.1z"/>
-    <path fill="#00FFA3" d="M0 184.3L127.6 258.5 255.2 184.3 127.6 110.1z"/>
-    <path fill="#00FFA3" d="M0 368.7L127.6 442.8 255.2 368.7 127.6 294.5z"/>
-  </svg>
+  <!-- Bouton musique via SVG -->
+  <img id="btn-music" src="assets/sol2.svg" alt="Play Music" tabindex="0" />
 
-  <!-- Pied de page -->
-  <footer>
-    &copy; 2025 Solamina Labs. Not financial advice. Glitch responsibly.
-  </footer>
+  <!-- Message après clic -->
+  <div id="info-message">
+    This site is still in its early days. We're actively building and improving. Thanks for your patience!
+  </div>
 
   <!-- Audio -->
   <audio id="bg-music" autoplay muted loop>
@@ -107,17 +123,19 @@
     Your browser does not support the audio element.
   </audio>
 
+  <!-- Script -->
   <script>
     const music = document.getElementById("bg-music");
     const btnMusic = document.getElementById("btn-music");
+    const info = document.getElementById("info-message");
 
     function startMusic() {
       music.muted = false;
-      music.play().catch(e => console.warn("Autoplay bloqué : interaction requise", e));
+      music.play().catch(e => console.warn("Autoplay blocked:", e));
+      info.classList.add("visible");
     }
 
     btnMusic.addEventListener("click", startMusic);
-
     btnMusic.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -125,6 +143,11 @@
       }
     });
   </script>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Solamina Labs. Not financial advice. Glitch responsibly.
+  </footer>
 
 </body>
 </html>
