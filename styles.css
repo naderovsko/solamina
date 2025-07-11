@@ -1,0 +1,28 @@
+
+/* --- styles.css pour Solamina --- */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0f4ff, #d6e4ff);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1 {
+  color: #4f46e5;
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #4338ca;
+  transform: scale(1.03);
+}
+
+audio {
+  display: none;
+}
